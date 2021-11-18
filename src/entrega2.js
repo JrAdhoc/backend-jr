@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 
-export class contenedor {
+class ContenedorImport {
     constructor(title, price, thumbnail, id) {
         this.title = title;
         this.price = price;
@@ -56,7 +56,7 @@ export class contenedor {
                 console.log(productos.filter(x => x.id === num));
             }
         } catch (err) {
-            console.error(err)
+            console.error({error: 'Producto no encontrado!'})
         };
     };
     getAll() {
@@ -84,7 +84,7 @@ export class contenedor {
                 ~removeIndex && productos.splice(removeIndex, 1);
             }
         } catch (err) {
-            console.error(err)
+            console.error({error: 'Producto no encontrado!'})
         };
 
         let dataToWrite = JSON.stringify(productos);
@@ -109,12 +109,66 @@ export class contenedor {
             }
         });
     }
+    getRandom() {
+        let productosRandom;
+        let productoRandom;
+
+        try {
+            const data = fs.readFileSync('./products.txt', 'utf8')
+            if (data !== "") {
+                productosRandom = JSON.parse(data);
+                productoRandom = JSON.stringify(productosRandom[Math.floor(Math.random()*productosRandom.length)]);
+            }
+        } catch (err) {
+            console.error(err)
+        };
+        return productoRandom;
+    };
+    updateProduct(num, newTitle, newPrice, newThumbnail) {
+        let productos;
+
+        try {
+            const data = fs.readFileSync('./products.txt', 'utf8')
+            if (data !== "") {
+                productos = JSON.parse(data);
+                let updatingProduct = productos.map(item => item.id).indexOf(num);
+                ~removeIndex && productos.splice(removeIndex, 1);
+                if(newTitle){
+                    updatingProduct.title = newTitle;
+                };
+                if(newPrice){
+                    updatingProduct.price = newPrice;
+                };
+                if(newThumbnail){
+                    updatingProduct.imagen = newThumbnail;
+                };
+                updatingProduct.id = num;
+                productos.push(updatingProduct);
+
+            }
+        } catch (err) {
+            console.error(err)
+        };
+
+        let dataToWrite = JSON.stringify(productos);
+        fs.writeFile('./products.txt', `${dataToWrite}`, error => {
+            if (error) {
+                console.log("no se pudo agregar");
+            }
+            else {
+                console.log('Producto borrado!');
+
+            }
+        });
+    };
 }
 
-const usuario = new contenedor('Casco de Hockey', 2300, 'https://static.turbosquid.com/Preview/2014/05/20__16_18_32/aHockeyhelmetsporticeprofessionalhat0001.jpgf31d4a54-2c8f-496f-9455-9d2885f46be3Large.jpg');
+module.exports = ContenedorImport;
+
+// const usuario = new contenedor('Casco de Hockey', 2300, 'https://static.turbosquid.com/Preview/2014/05/20__16_18_32/aHockeyhelmetsporticeprofessionalhat0001.jpgf31d4a54-2c8f-496f-9455-9d2885f46be3Large.jpg');
 
 
- usuario.save(usuario);
+//  usuario.save(usuario);
 // usuario.getByID(3);
 // usuario.getAll();
 // usuario.deleteById(4);
