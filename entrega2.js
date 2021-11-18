@@ -1,6 +1,7 @@
 const fs = require('fs')
 
-class contenedor {
+
+export class contenedor {
     constructor(title, price, thumbnail, id) {
         this.title = title;
         this.price = price;
@@ -70,6 +71,7 @@ class contenedor {
         } catch (err) {
             console.error(err)
         };
+        return productos;
     };
     deleteById(num) {
         let productos;
@@ -117,3 +119,5 @@ const usuario = new contenedor('Casco de Hockey', 2300, 'https://static.turbosqu
 // usuario.getAll();
 // usuario.deleteById(4);
 // usuario.deleteAll();
+
+
