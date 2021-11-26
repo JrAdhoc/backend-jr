@@ -1,0 +1,13 @@
+html
+    body
+        if exist
+            ul
+                each product in products
+                    li
+                        div
+                            p=product.thumbnail
+                            p=product.title
+                            p=product.price
+            h2='fin de los productos'
+        else
+            p='no hay productos para mostrar :('
