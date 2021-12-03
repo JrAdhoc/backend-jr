@@ -1,6 +1,6 @@
-const express = require('express');
+import express from "express";
 const router = express.Router();
-const ContenedorImport = require('../entrega2');
+import ContenedorImport from '../classes/contenedor.js';
 const contenedor = new ContenedorImport();
 
 //GETS

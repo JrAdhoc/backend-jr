@@ -1,3 +1,5 @@
+// import { ContenedorImport } from '../classes/contenedor';
+
 function saveProduct(e) {
     e.preventDefault();
     let form = document.getElementById('formulario');
@@ -14,7 +16,7 @@ function saveProduct(e) {
     }
 
 
-    fetch('/products',{
+    fetch('/api/products',{
         method:'POST',
         body:product,
         headers:{
@@ -22,3 +24,4 @@ function saveProduct(e) {
         }
     });
 }
+

@@ -1,0 +1,27 @@
+h1 {
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    border: 3px solid black
+}
+.product-card{
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid #323232;
+    background: #CACACA;
+}
+
+p{
+    text-align: center;
+}
+
+.product-card:hover{
+    transition: 0.4s;
+    background: #6A6A6A;
+    border-color: #CACACA;
+    color: #DAD9D9;
+}
+
+.product-Form{
+    display: inline-block; 
+}
+

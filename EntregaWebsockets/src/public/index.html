@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="./style2.css">
+</head>
+<body>
+    <div>
+        <input type="button" onclick="location.href='/views/productos'" value="Ver Productos">
+        <h1>Agregar Producto</h1>
+        <form id="productForm" name="productForm" enctype="multipart/form-data">
+            <label for="title">Nombre:</label>
+            <input name="title" required>
+            <label for="price">Precio:</label>
+            <input name="price" required>
+            <label for="thumbnail">Url de imagen:</label>
+            <input name="thumbnail" required>
+            <button type="submit">GUARDAR</button>
+        </form>
+    </div>
+    <h1>Lista de Productos:</h1>
+    <div>
+        <div id="productTable"></div>
+    </div>
+    <h1>Chat en vivo</h1>
+    <div class="chat-container">
+        <p>Email:</p>
+        <input type="text" id="email" required>
+        <p>Mensaje:</p>
+        <input type="text" id="mensaje" required>
+        <div id="container">
+            <p id="log"></p>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

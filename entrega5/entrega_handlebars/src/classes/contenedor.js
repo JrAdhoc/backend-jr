@@ -1,4 +1,4 @@
-const fs = require('fs')
+import * as fs from "fs";
 
 
 class ContenedorImport {
@@ -9,11 +9,11 @@ class ContenedorImport {
         this.id = id;
 
     }
-    save(objeto) {
+    async save(objeto) {
         let productos = [];
 
         try {
-            const data = fs.readFileSync('./products.txt', 'utf8')
+            let data = await fs.promises.readFile('./src/files/products.txt', 'utf8')
             if (data !== "") {
                 productos = JSON.parse(data);
                 console.log(productos);
@@ -31,7 +31,7 @@ class ContenedorImport {
         productos.push(devolver);
         let dataToWrite = JSON.stringify(productos);
 
-        fs.writeFile('./products.txt', `${dataToWrite}`, error => {
+        await fs.writeFile('./src/files/products.txt', `${dataToWrite}`, error => {
             if (error) {
                 console.log("no se pudo agregar");
             }
@@ -46,11 +46,11 @@ class ContenedorImport {
 
 
     }
-    getByID(num) {
+    async getByID(num) {
         let productos;
 
         try {
-            const data = fs.readFileSync('./products.txt', 'utf8')
+            const data = await fs.readFileSync('./src/files/products.txt', 'utf8')
             if (data !== "") {
                 productos = JSON.parse(data);
                 console.log(productos.filter(x => x.id === num));
@@ -59,11 +59,11 @@ class ContenedorImport {
             console.error({error: 'Producto no encontrado!'})
         };
     };
-    getAll() {
+    async getAll() {
         let productos;
 
         try {
-            const data = fs.readFileSync('./products.txt', 'utf8')
+            const data = await fs.readFileSync('./src/files/products.txt', 'utf8')
             if (data !== "") {
                 productos = JSON.parse(data);
                 console.log(productos);
@@ -73,11 +73,11 @@ class ContenedorImport {
         };
         return productos;
     };
-    deleteById(num) {
+    async deleteById(num) {
         let productos;
 
         try {
-            const data = fs.readFileSync('./products.txt', 'utf8')
+            const data = await fs.readFileSync('./src/files/products.txt', 'utf8')
             if (data !== "") {
                 productos = JSON.parse(data);
                 let removeIndex = productos.map(item => item.id).indexOf(num);
@@ -88,7 +88,7 @@ class ContenedorImport {
         };
 
         let dataToWrite = JSON.stringify(productos);
-        fs.writeFile('./products.txt', `${dataToWrite}`, error => {
+        await fs.writeFile('./src/files/products.txt', `${dataToWrite}`, error => {
             if (error) {
                 console.log("no se pudo agregar");
             }
@@ -98,8 +98,8 @@ class ContenedorImport {
             }
         });
     };
-    deleteAll() {
-        fs.writeFile('./products.txt', "", error => {
+    async deleteAll() {
+        await fs.writeFile('./src/files/products.txt', "", error => {
             if (error) {
                 console.log("no se pudo agregar");
             }
@@ -109,12 +109,12 @@ class ContenedorImport {
             }
         });
     }
-    getRandom() {
+    async getRandom() {
         let productosRandom;
         let productoRandom;
 
         try {
-            const data = fs.readFileSync('./products.txt', 'utf8')
+            const data = await fs.readFileSync('./src/files/products.txt', 'utf8')
             if (data !== "") {
                 productosRandom = JSON.parse(data);
                 productoRandom = JSON.stringify(productosRandom[Math.floor(Math.random()*productosRandom.length)]);
@@ -124,11 +124,11 @@ class ContenedorImport {
         };
         return productoRandom;
     };
-    updateProduct(num, newTitle, newPrice, newThumbnail) {
+    async updateProduct(num, newTitle, newPrice, newThumbnail) {
         let productos;
 
         try {
-            const data = fs.readFileSync('./products.txt', 'utf8')
+            const data = await fs.readFileSync('./src/files/products.txt', 'utf8')
             if (data !== "") {
                 productos = JSON.parse(data);
                 let updatingProduct = productos.map(item => item.id).indexOf(num);
@@ -151,7 +151,7 @@ class ContenedorImport {
         };
 
         let dataToWrite = JSON.stringify(productos);
-        fs.writeFile('./products.txt', `${dataToWrite}`, error => {
+        await fs.writeFile('./src/files/products.txt', `${dataToWrite}`, error => {
             if (error) {
                 console.log("no se pudo agregar");
             }
@@ -163,17 +163,5 @@ class ContenedorImport {
     };
 }
 
-export { ContenedorImport };
 
-/* module.exports = ContenedorImport; */
-
-// const usuario = new contenedor('Casco de Hockey', 2300, 'https://static.turbosquid.com/Preview/2014/05/20__16_18_32/aHockeyhelmetsporticeprofessionalhat0001.jpgf31d4a54-2c8f-496f-9455-9d2885f46be3Large.jpg');
-
-
-//  usuario.save(usuario);
-// usuario.getByID(3);
-// usuario.getAll();
-// usuario.deleteById(4);
-// usuario.deleteAll();
-
-
+export default ContenedorImport;
