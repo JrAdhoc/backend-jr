@@ -1,3 +1,5 @@
+import Chats from "../services/Chats";
+
 const socket = io();
 
 let fecha = new Date();
@@ -13,6 +15,7 @@ function FechayHora(fecha){
 }
 
 socket.on('updateProducts', data=>{
+    
     let products = data.payload;
     fetch('templates/productTable.handlebars').then(string=>string.text()).then(template=>{
         const processedTemplate = Handlebars.compile(template);
