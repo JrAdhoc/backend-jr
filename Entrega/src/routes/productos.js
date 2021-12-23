@@ -2,19 +2,21 @@ import express from 'express';
 import Contenedor from '../classes/Class.js';
 import {io} from '../app.js';
 import { authMiddleware } from '../utils.js';
+import Products from '../services/Products.js';
 const router = express.Router();
 const contenedorProdutos  = new Contenedor();
+const productsService = new Products();
 
 //GETS
 router.get('/',(req,res)=>{
-    contenedorProdutos.getAll().then(result=>{
+    productsService.getAll().then(result=>{
         res.send(result);   
     })
 })
 
 router.get('/:uid',(req,res)=>{
     let id = parseInt(req.params.uid);
-    contenedorProdutos.getById(id).then(result=>{
+    productsService.getProductById(id).then(result=>{
         console.log(result);
         res.send(result);
     })
@@ -22,10 +24,13 @@ router.get('/:uid',(req,res)=>{
 //POSTS
 router.post('/',authMiddleware,(req,res)=>{
     let producto = req.body;
-    if(req.auth)
-    contenedorProdutos.save(producto).then(result=>{
+    if(req.auth){
+        if(!producto.title) return res.send({status:'error',message:'faltan datos'});
+        if(!producto.price) return res.send({status:'error',message:'faltan datos'});
+        if(!producto.thumbnail) return res.send({status:'error',message:'faltan datos'});
+    productsService.registerProduct(producto).then(result=>{
         res.send(result);
-    })
+    })}
 })
 
 //PUTS
@@ -33,7 +38,7 @@ router.put('/:uid',authMiddleware,(req,res)=>{
     let id = req.params.uid;
     let producto = req.body;
     if(req.auth)
-    contenedorProdutos.editProduct(id, producto).then(result=>{
+    productsService.modifyProductById(id, producto).then(result=>{
         res.send(result);
     })
 })
@@ -42,7 +47,7 @@ router.put('/:uid',authMiddleware,(req,res)=>{
 router.delete('/:uid',authMiddleware,(req,res)=>{
     let id = req.params.uid;
     if(req.auth)
-    contenedorProdutos.deleteById(id).then(result=>{
+    productsService.deleteProductById(id).then(result=>{
         res.send(result);
     })
 })

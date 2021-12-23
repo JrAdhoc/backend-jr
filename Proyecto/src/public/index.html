@@ -11,6 +11,8 @@
 <body>
     <div>
         <input type="button" onclick="location.href='/views/productos'" value="Ver Productos">
+        <a href="modify.html">Modificar producto</a>
+        <a href="delete.html">Borrar producto</a>
         <h1>Agregar Producto</h1>
         <form id="productForm" name="productForm" enctype="multipart/form-data">
             <label for="title">Nombre:</label>
@@ -22,6 +24,8 @@
             <button type="submit">GUARDAR</button>
         </form>
     </div>
+    
+    
     <h1>Lista de Productos:</h1>
     <div>
         <div id="productTable"></div>
