@@ -24,7 +24,7 @@ socket.on('updateProducts', data=>{
         div.innerHTML = html; 
     })
 })
-
+ //CHAT EN VIVO
 let input = document.getElementById('mensaje');
 let email = document.getElementById('email');
 

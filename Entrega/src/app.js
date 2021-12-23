@@ -7,6 +7,7 @@ import carritoRouter from './routes/carrito.js';
 import {Server} from 'socket.io';
 import __dirname from './utils.js';
 import { authMiddleware } from './utils.js';
+import { chatsdb } from './config.js';
 
 const app = express();
 const PORT = process.env.PORT||8080;
@@ -50,4 +51,16 @@ io.on('connection', async socket=>{
     console.log(`El socket ${socket.id} se ha conectado`);
     let productos = await contenedor.getAll();
     socket.emit('updateProducts',productos);
+
+    socket.on('message',data=>{
+        messages.push(data);
+        io.emit('messagelog', messages);
+        try{
+            if(data) return chatsdb.table('chats').insert(data)
+            return {status:'success',payload:result}
+        } catch(error){
+            console.log(error);
+           return{status:'error',message:error}
+        }
+    })
 })
