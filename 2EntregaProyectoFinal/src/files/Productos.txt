@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "timestamp": "7/12/2021",
+    "name": "cartera",
+    "price": "4500",
+    "description": "Cartera de cuero",
+    "codigo": "43351",
+    "stock": "8",
+    "thumbnail": "cartera.png"
+  },
+  {
+    "id": 2,
+    "timestamp": "7/12/2021",
+    "name": "lapiz",
+    "price": 80,
+    "description": "Lapiz negro comun",
+    "codigo": 16734,
+    "stock": 100,
+    "thumbnail": "lapiz.png"
+  }
+]
