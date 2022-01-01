@@ -32,4 +32,36 @@ export default class MongoContainer{
             return {status:"error", error:error}
         }
     }
+    getById = async(productoId)=>{
+        try {
+            let result = await this.collection.find(ObjectId(productoId))
+            return {status:"succes", message:"agregado exitosamente",payload:result}
+        } catch (error) {
+            return {status:"error", error:error}
+        }
+    }
+    updateById = async(productoId, body) => {
+        try {
+            let result = await this.collection.findByIdAndUpdate(productoId, body);
+            return {status:"succes", message:"agregado exitosamente",payload:result}
+        } catch (error) {
+            return {status:"error", error:error}
+        }
+    }
+    deleteById = async(productoId)=>{
+        try {
+            let result = await this.collection.deleteOne({"_id" : ObjectId(productoId)})
+            return {status:"succes", message:"agregado exitosamente",payload:result}
+        } catch (error) {
+            return {status:"error", error:error}
+        }
+    }
+    deleteAll = async() =>{
+        try {
+            let documents = await this.collection.drop();
+            return {status:"success",payload:documents}
+        } catch (error) {
+            return {status:"error", error:error}
+        }
+    }
 }

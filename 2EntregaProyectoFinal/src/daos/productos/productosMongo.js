@@ -1,5 +1,7 @@
-import Schema from 'mongoose';
+import pkg from 'mongoose'
 import MongoContainer from "../../contenedores/MongoContainer.js";
+
+const { Schema } = pkg;
 
 export default class ProductosMongo extends MongoContainer{
     constructor(){

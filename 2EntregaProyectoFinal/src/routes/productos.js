@@ -26,7 +26,7 @@ router.get('/:uid',(req,res)=>{
 router.post('/',authMiddleware,(req,res)=>{
     let producto = req.body;
     if(req.auth)
-    contenedorProductos.save(producto).then(result=>{
+    productos.saveOne(producto).then(result=>{
         res.send(result);
     })
 })
@@ -36,7 +36,7 @@ router.put('/:uid',authMiddleware,(req,res)=>{
     let id = req.params.uid;
     let producto = req.body;
     if(req.auth)
-    contenedorProductos.editProduct(id, producto).then(result=>{
+    productos.updateById(id, producto).then(result=>{
         res.send(result);
     })
 })
@@ -45,7 +45,12 @@ router.put('/:uid',authMiddleware,(req,res)=>{
 router.delete('/:uid',authMiddleware,(req,res)=>{
     let id = req.params.uid;
     if(req.auth)
-    contenedorProductos.deleteById(id).then(result=>{
+    productos.deleteById(id).then(result=>{
+        res.send(result);
+    })
+})
+router.delete('/',(req,res)=>{
+    productos.deleteAll().then(result=>{
         res.send(result);
     })
 })
