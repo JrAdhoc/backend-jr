@@ -1,17 +1,21 @@
 import config from '../config.js';
-const admin = require('firebase-admin');
+import { initializeApp } from 'firebase-admin/app'
+import { cert } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
 const serviceAccount = require('../db/ecommerce-jr-firebase-adminsdk-x4p3d-3e5338d093.json')
 
 
-admin.initializeApp({
-    credential:admin.cert(serviceAccount),
+initializeApp({
+    credential:cert(serviceAccount),
     databaseURL: config.firebase.baseUrl
 })
-const db = admin.firestore();
+const db = getFirestore();
 const currentCollection = db.collection('products');
 
 
-export default class FirebaseCotainer {
+export default class FirebaseCotainer { 
 
     constructor(){}
 
