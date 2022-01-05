@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase-admin/app'
 import { cert } from 'firebase-admin/app'
 import { getFirestore } from 'firebase-admin/firestore'
 import { createRequire } from 'module'
+import { response } from 'express';
 const require = createRequire(import.meta.url)
 const serviceAccount = require('../db/ecommerce-jr-firebase-adminsdk-x4p3d-3e5338d093.json')
 
@@ -45,17 +46,18 @@ getById = async(productoId)=>{
     try {
         const doc = currentCollection.doc(productoId)
         let product = await doc.get();
-        return {status:"success",payload:product.data()}
+        return {status:"success",payload:product._fieldsProto}
     } catch (error) {
         return {status:"error", error:error}
     }
 }
 
-UpdateById = async(productoId,body)=>{
+updateById = async(productoId,body)=>{
     try {
         const doc = currentCollection.doc(productoId)
-        await doc.update(body)
-    } catch (error) {
+        let result = await doc.update(body)
+ return {status:"success",payload:result}
+} catch (error) {
         return {status:"error", error:error}
     }
 }
@@ -64,16 +66,9 @@ deleteById = async(productoId) => {
     try{
         const doc = currentCollection.doc(productoId)
         await doc.delete();
+        return{status:"success",message: "Producto eliminado correctamente!"}
     }catch{
         return{status:"error",message: "Error al eliminar el producto"}
-    }
-}
-
-deleteAll = async() =>{
-    try {
-         await currentCollection.drop();
-    } catch (error) {
-        return {status:"error", error:error}
     }
 }
 }

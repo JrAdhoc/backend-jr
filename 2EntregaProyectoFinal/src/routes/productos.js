@@ -16,28 +16,28 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/:uid',(req,res)=>{
-    let id = parseInt(req.params.uid);
-    productos.getById(id).then(result=>{
-        console.log(result);
+    let id = req.params.uid;
+    let producto = productos.getById(id).then(result=>{
         res.send(result);
     })
 })
+
 //POSTS
 router.post('/',authMiddleware,(req,res)=>{
     let producto = req.body;
     if(req.auth)
     productos.saveOne(producto).then(result=>{
-        res.send(result);
+        res.send({status:"success",payload: producto});
     })
 })
 
 //PUTS
 router.put('/:uid',authMiddleware,(req,res)=>{
-    let id = req.params.uid;
+    let id =req.params.uid;
     let producto = req.body;
     if(req.auth)
     productos.updateById(id, producto).then(result=>{
-        res.send(result);
+        res.status(200).send({status:"success",payload: producto});
     })
 })
 

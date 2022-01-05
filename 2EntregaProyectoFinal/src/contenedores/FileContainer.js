@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { PerformanceObserver } from 'perf_hooks';
 import config from '../config.js';
 
 
@@ -7,6 +8,36 @@ export default class FileContainer{
         this.url = `${config.FileSystem.baseUrl}${file_endpoint}`
     }
 
+
+
+    saveOne = async(product) => {
+        try{
+            let data = await fs.promises.readFile(this.url,'utf-8');
+            let fecha = new Date;
+            let timestamp = fecha.getDate()+'/'+(fecha.getMonth()+1)+'/'+fecha.getFullYear();
+            let products = JSON.parse(data);
+            let id = products[products.length-1].id+1;
+            product = Object.assign({id:id},{timestamp: timestamp},product);
+            products.push(product);
+            try{
+                await fs.promises.writeFile(this.url,JSON.stringify(products,null,2));
+                return {status:"success",message:"Producto agregado al carrito"}
+            }catch{
+                return {statis:"error",message:"No se pudo agregar el producto"} 
+            }
+        }catch{
+            let fecha = new Date;
+            let timestamp = fecha.getDate()+'/'+(fecha.getMonth()+1)+'/'+fecha.getFullYear();
+            product = Object.assign({id:1},{timestamp: timestamp},product)
+            try{
+                await fs.promises.writeFile(this.url,JSON.stringify([product],null,2));
+                return {status:"success", message:"Producto cargado"}
+            }
+            catch{
+                return {status:"error",message:"No se pudo cargar el producto"}
+            }
+        }
+    }
 
     getAll = async() => {
         try {
@@ -17,13 +48,14 @@ export default class FileContainer{
     }
 
     }
-    getById = async(id)=>{
+    getById = async(productoId)=>{
         try {
+            let id=parseInt(productoId)
             let data = await fs.promises.readFile(this.url, 'utf-8');
             let objects = JSON.parse(data);
             let search = objects.find(object=>object.id===id);
             if(search){
-                return {status:"success",payLoad:search}
+                return {status:"success",payload:search}
             }else{
                 return {status:"error",error:"Objeto no encontrado"}
             }
@@ -31,17 +63,7 @@ export default class FileContainer{
             return {status:`error",error:"No se pudo obtener la información: ${error}`}
         }
     }
-    deleteAll = async() => {
-        try{
-            let contenido = await fs.promises.readFile(this.url, 'utf-8')
-            let arrayProductos = JSON.parse(contenido)
-            arrayProductos.splice(0,arrayProductos.length)
-            await fs.writeFile(this.url,JSON.stringify(arrayProductos))
-            return{status:"success", message:"TODOS los productos fueron eliminados correctamente"}
-        }catch{
-            return{status:"error",message:"Error al querer eliminar TODOS los productos"}
-        }
-    }
+
     deleteById = async(id) => {
         try{
             let contenido = await fs.promises.readFile(this.url,'utf-8')
@@ -81,4 +103,5 @@ export default class FileContainer{
             return {status:"error", message:"Fallo al actualizar el producto"}
         }
     }
+
 }

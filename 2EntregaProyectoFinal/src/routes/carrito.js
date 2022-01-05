@@ -5,8 +5,6 @@ import { carrito } from '../daos/index.js';
 
 
 const router = express.Router();
-const carritoProdutos  = new Contenedor();
-
 //GETS
 router.get('/:uid/productos',(req,res)=>{
     let id = req.params.uid;
@@ -17,7 +15,7 @@ router.get('/:uid/productos',(req,res)=>{
 
 //POSTS
 router.post('/',(req,res)=>{
-    carritoProdutos.newCarrito().then(result=>{
+    carrito.crearCarrito().then(result=>{
         res.send(result);
     })
 })
@@ -25,7 +23,7 @@ router.post('/',(req,res)=>{
 router.post('/:uid/productos',(req,res)=>{
     let id = parseInt(req.params.uid);
     let producto = req.body;
-    carritoProdutos.agregarProductosCarrito(id,producto).then(result=>{
+    carrito.addToCart(id,producto).then(result=>{
         res.send(result);   
     })
 })
@@ -33,7 +31,7 @@ router.post('/:uid/productos',(req,res)=>{
 //DELETES
 router.delete('/:uid',(req,res)=>{
     let id = req.params.uid;
-    carritoProdutos.deleteCarrito(id).then(result=>{
+    carrito.deleteCarrito(id).then(result=>{
         res.send(result);
     })
 })
@@ -41,7 +39,7 @@ router.delete('/:uid',(req,res)=>{
 router.delete('/:uid/productos/:id_prod',(req,res)=>{
     let idCarrito = parseInt(req.params.uid);
     let idProd = parseInt(req.params.id_prod);
-    carritoProdutos.deleteProductoCarrito(idCarrito,idProd).then(result=>{
+    carrito.deleteProductoCarrito(idCarrito,idProd).then(result=>{
         res.send(result);
     })
 })

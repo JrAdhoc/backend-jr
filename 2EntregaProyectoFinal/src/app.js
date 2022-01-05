@@ -9,7 +9,7 @@ import __dirname from './utiles.js';
 import { authMiddleware } from './utiles.js';
 
 const app = express();
-const PORT = process.env.PORT||4050;
+const PORT = 3000;
 const server = app.listen(PORT,()=>{
     console.log("servidor escuchando en: "+PORT);
 })
