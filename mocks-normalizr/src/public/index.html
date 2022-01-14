@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.4.1/dist/normalizr.browser.min.js"crossorigin="anonymous"></script>
+   
+</head>
+<body>
+    <h1>Centro de mensajes</h1>
+    <div class="chat-container">
+        <form id="productForm">
+            <p>Email:</p>
+            <input type="text" id="email" required>
+            <p>Nombre:</p>
+            <input type="text" id="nombre" required>
+            <p>Apellido:</p>
+            <input type="text" id="apellido" required>
+            <p>Edad:</p>
+            <input type="text" id="edad" required>
+            <p>Alias:</p>
+            <input type="text" id="alias" required>
+            <p>Avatar:</p>
+            <input type="text" id="avatar" required>
+            <p>Mensaje:</p>
+            <input type="text" id="mensaje" required>
+
+        </form>
+        <div id="container">
+            <div id="log"></div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

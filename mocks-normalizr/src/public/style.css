@@ -1,0 +1,52 @@
+h1 {
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    border: 3px solid black
+}
+
+.product-container{
+    display: inline-block;
+    border: 2px solid #323232;
+    background: #CACACA;
+}
+
+.product-name{
+    text-align: center;
+}
+
+.product-card{
+    padding: 10px;
+    width: 170px;
+    height: 170px;
+    overflow: hidden;
+}
+
+
+
+.product-card img{
+    width: 100%;
+    height: auto;
+}
+
+@supports(object-fit: cover){
+    .product-card img{
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+}
+
+.product-container:hover{
+    transition: 0.4s;
+    background: #6A6A6A;
+    border-color: #CACACA;
+    color: #DAD9D9;
+}
+
+.product-Form{
+    display: inline-block;
+}
+
+#container{
+    background-color: #b3b3b3ee;
+}
