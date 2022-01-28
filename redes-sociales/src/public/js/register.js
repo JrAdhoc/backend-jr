@@ -1,0 +1,37 @@
+let form = document.getElementById("registerForm");
+
+form.addEventListener('submit',function(event){
+    event.preventDefault();
+    let info = new FormData(form);
+    let sendObject = {
+        first_name: info.get('first_name'),
+        last_name: info.get('last_name'),
+        age: info.get('age'),
+        username: info.get('username'),
+        email: info.get('email'),
+        password: info.get('password')
+    }
+    fetch('/register',{
+        method:"POST",
+        body:JSON.stringify(sendObject),
+        headers:{
+            'Content-type':'application/json'
+        }
+    }).then(result=>{
+        result.json().then(json=>{
+            form.reset();
+            alert('User register');
+            Swal.fire({
+                icon:"Success",
+                text:"User register, please go to login"
+            })
+        })
+    })
+})
+
+let facebookBtn = document.getElementById("facebook-login");
+
+facebookBtn.addEventListener('click',(evt)=>{
+    location = "http://localhost:4001/auth/facebook"
+
+})
