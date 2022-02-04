@@ -1,0 +1,12 @@
+<h1>Random Products</h1>
+{{#each products}}
+<div class="container">
+    <div class="card" style="width: 18rem;">
+        <img src={{this.thumbnail}} class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text">Price: {{this.price}}$ </p>
+        </div>
+    </div>
+</div>
+{{/each}}
