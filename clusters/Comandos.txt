@@ -1,0 +1,27 @@
+--INICIAR PM2--
+pm2 start app.js
+
+--INICIAR MODO FORK--
+pm2 start app.js --port "" --modo ""
+
+--INICIAR MODO CLUSTER--
+pm2 start app.js -i max --port "" --modo ""
+
+--MONITOREAR APLICACIONES--
+pm2 monit
+
+--LISTAR APLICACIONES EN EJECUCION--
+pm2 list
+
+--DETENER APLICACION--
+pm2 stop
+
+--REINICIAR APLICACION--
+pm2 restart
+
+--ELIMINAR APLICACION--
+pm2 delete
+
+--DETALLAR APLICACION--
+pm2 describe <id|ap_name>
+

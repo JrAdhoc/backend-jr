@@ -1,0 +1,10 @@
+{
+    "apps":[
+        {
+            "name":"Process1",
+            "script":"app.js",
+            "watch":"true",
+            "args":"4041"
+        }
+    ]
+}
