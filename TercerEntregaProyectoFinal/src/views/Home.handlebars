@@ -1,0 +1,13 @@
+<input type="button" onclick="location.href='/session/logout'" value="Cerrar sesión">
+<input type="button" onclick="miFunc()" value="Ver Carrito">
+<h1>Bienvenido {{this.name}}</h1>
+<img src={{this.avatar}} alt="Imagen">
+
+<p>Nuestros productos:</p>
+<div class="product-container" id="product-container"></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="profile.js"></script>
+<script>
