@@ -26,7 +26,7 @@ const transport = createTransport({
 
 router.post('/register',uploader.single('avatar'),passportCall('register'),(req,res)=>{
     const mail={    
-        from:"Ecommerce<a>",
+        from:"Ecommerce",
         to:"juanii.rivero@gmail.com",
         subject:"New Register",
         html:`<h1>New user:</h1></br>
